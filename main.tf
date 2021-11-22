@@ -256,7 +256,7 @@ resource "aws_api_gateway_authorizer" "default" {
   identity_source                  = length(var.identity_sources) > 0 ? element(var.identity_sources, count.index) : "method.request.header.Authorization"
   type                             = length(var.authorizer_types) > 0 ? element(var.authorizer_types, count.index) : "TOKEN"
   identity_validation_expression   = length(var.identity_validation_expressions) > 0 ? element(var.identity_validation_expressions, count.index) : ""
-  provider_arns                    = length(var.provider_arns) > 0 ? element(var.provider_arns, count.index) : null
+  provider_arns                    = length(var.provider_arns) > 0 ? [element(var.provider_arns, count.index)] : null
 }
 
 # Module      : Api Gateway Gateway Response
