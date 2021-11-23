@@ -18,7 +18,7 @@ output "tags" {
 
 output authorizer_id{
 
-value =  aws_api_gateway_authorizer.default[0].id
+value =  aws_api_gateway_authorizer.default.*.id
 
 
 }
