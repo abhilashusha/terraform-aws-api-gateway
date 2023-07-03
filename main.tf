@@ -160,8 +160,12 @@ resource "aws_api_gateway_integration" "options_integration" {
   resource_id = aws_api_gateway_resource.default.*.id[count.index]
   http_method = aws_api_gateway_method.options_method.*.http_method[count.index]
 
+
   type             = "MOCK"
   content_handling = "CONVERT_TO_TEXT"
+  request_templates = {                  # Not documented
+    "application/json" = "${file("api_gateway_body_mapping.template")}"
+  }
 
   depends_on = [aws_api_gateway_method.options_method]
 }
