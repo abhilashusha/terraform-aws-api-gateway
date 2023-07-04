@@ -163,8 +163,12 @@ resource "aws_api_gateway_integration" "options_integration" {
 
   type             = "MOCK"
   content_handling = "CONVERT_TO_TEXT"
-  request_templates = {                  # Not documented
-    "application/json" = "Empty"
+ request_templates = {
+    "application/json" = jsonencode(
+      {
+        statusCode = 200
+      }
+    )
   }
 
   depends_on = [aws_api_gateway_method.options_method]
