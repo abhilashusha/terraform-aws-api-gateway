@@ -164,7 +164,7 @@ resource "aws_api_gateway_integration" "options_integration" {
   type             = "MOCK"
   content_handling = "CONVERT_TO_TEXT"
   request_templates = {                  # Not documented
-    "application/json" = "${file("api_gateway_body_mapping.template")}"
+    "application/json" = "Empty"
   }
 
   depends_on = [aws_api_gateway_method.options_method]
