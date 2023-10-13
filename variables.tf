@@ -19,6 +19,13 @@ variable "repository" {
 
 }
 
+variable "path_ignore_security" {
+  type        = list(any)
+  default     = []
+  description = "path to ignore API security"
+}
+
+
 variable "environment" {
   type        = string
   default     = "https://registry.terraform.io/modules/clouddrove/api-gateway/aws"
