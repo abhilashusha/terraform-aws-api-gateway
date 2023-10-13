@@ -69,8 +69,10 @@ resource "aws_api_gateway_method" "default" {
   rest_api_id          = aws_api_gateway_rest_api.default.*.id[0]
   resource_id          = aws_api_gateway_resource.default.*.id[count.index]
   http_method          = element(var.http_methods, count.index)
+  #&& var.path_parts[count.index] != "addEnquiry" 
+
   authorization        = length(var.authorizations) > 0 && var.path_parts[count.index] != "addEnquiry"  ? element(var.authorizations, count.index) : "NONE"
-  authorizer_id        = length(var.authorizer_ids) > 0 && var.path_parts[count.index] != "addEnquiry"  ? element(var.authorizer_ids, count.index) : (var.authorizer_count > 0 ? aws_api_gateway_authorizer.default.*.id[count.index] : null)
+  authorizer_id        = length(var.authorizer_ids) > 0 ? element(var.authorizer_ids, count.index) : (var.authorizer_count > 0 ? aws_api_gateway_authorizer.default.*.id[count.index] : null)
   authorization_scopes = length(var.authorization_scopes) > 0 && var.path_parts[count.index] != "addEnquiry"   ? [element(var.authorization_scopes, count.index)]: null
   api_key_required     = length(var.api_key_requireds) > 0 ? element(var.api_key_requireds, count.index) : null
   request_models       = length(var.request_models) > 0 ? element(var.request_models, count.index) : { "application/json" = "Empty" }
