@@ -206,14 +206,6 @@ resource "aws_api_gateway_deployment" "default" {
   depends_on        = [aws_api_gateway_method.default, aws_api_gateway_integration.default]
 }
 
-resource "aws_api_gateway_stage" "default" {
-  count = var.deployment_enabled ? 1 : 0
-
-  stage_name    = var.stage_name
-  rest_api_id   = aws_api_gateway_rest_api.default.*.id[0]
-  deployment_id = aws_api_gateway_deployment.default.id
-}
-
 # Module      : Api Gateway Client Certificate
 # Description : Terraform module to create Api Gateway Client Certificate resource on AWS.
 resource "aws_api_gateway_client_certificate" "default" {
