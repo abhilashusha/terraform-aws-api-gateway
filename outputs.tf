@@ -1,13 +1,13 @@
 # Module      : Api Gateway
 # Description : Terraform Api Gateway module outputs.
 output "id" {
-  value       = aws_api_gateway_rest_api.default.id
-  description = "The ID of the REST API."
+  value       = [for r in aws_api_gateway_rest_api.default : r.id]
+  description = "The IDs of the REST APIs."
 }
 
 output "execution_arn" {
-  value       = aws_api_gateway_rest_api.default.execution_arn
-  description = "The Execution ARN of the REST API."
+  value       = [for r in aws_api_gateway_rest_api.default : r.execution_arn]
+  description = "The Execution ARNs of the REST APIs."
 }
 
 output "tags" {
